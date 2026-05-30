@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SaaS選定レポート（2026年5月31日時点）</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+      font-size: 15px;
+      line-height: 1.85;
+      color: #1e293b;
+      background: #f1f5f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 24px 100px;
+    }
+
+    /* ── ヘッダー ── */
+    .doc-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #0c4a6e 100%);
+      color: white;
+      padding: 48px 44px;
+      border-radius: 14px;
+      margin-bottom: 36px;
+      box-shadow: 0 8px 32px rgba(15,23,42,0.25);
+    }
+    .doc-header .meta { color: #94a3b8; font-size: 13px; margin-bottom: 8px; }
+    .doc-header h1 {
+      font-size: 30px;
+      font-weight: 800;
+      margin: 0 0 24px;
+      color: #f8fafc;
+      letter-spacing: -0.02em;
+    }
+    .doc-header .rec-box {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-left: 4px solid #fbbf24;
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+    }
+    .doc-header .rec-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .doc-header .rec-tools {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fbbf24;
+      margin-bottom: 4px;
+    }
+    .doc-header .rec-cost {
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+
+    /* ── 目次 ── */
+    .toc {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px 32px;
+      margin-bottom: 40px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .toc .toc-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+    .toc-grid a {
+      font-size: 13px;
+      color: #3b82f6;
+      text-decoration: none;
+    }
+    .toc-grid a:hover { text-decoration: underline; }
+
+    /* ── セクションマーカー ── */
+    .part-marker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 800;
+      margin: 48px 0 4px;
+    }
+    .part-marker.premise  { background: #dbeafe; color: #1d4ed8; }
+    .part-marker.summary  { background: #dcfce7; color: #15803d; }
+    .part-marker.detail   { background: #fef3c7; color: #92400e; }
+
+    /* ── 見出し ── */
+    h1.section-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
+      border-left: 6px solid #3b82f6;
+      padding: 10px 0 10px 18px;
+      margin: 4px 0 32px;
+      line-height: 1.35;
+    }
+    h1.section-title.green  { border-color: #22c55e; }
+    h1.section-title.amber  { border-color: #f59e0b; }
+
+    h2 {
+      font-size: 19px;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 40px 0 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    h2 .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: #1e293b;
+      color: white;
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #334155;
+      padding-left: 14px;
+      border-left: 3px solid #93c5fd;
+      margin: 28px 0 12px;
+    }
+
+    /* ── カード ── */
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-bottom: 28px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
+    }
+
+    /* ── テーブル ── */
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 14px 0 22px;
+      font-size: 14px;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+    }
+    thead th {
+      background: #e8edf3;
+      color: #1e293b;
+      padding: 11px 14px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    tbody tr:hover { background: #eff6ff; transition: background 0.1s; }
+    td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #e9eef5;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    /* 採用行ハイライト */
+    tr.winner td { background: #f0fdf4; }
+    tr.winner td:first-child { border-left: 3px solid #22c55e; }
+
+    /* 除外行 */
+    tr.excluded td { background: #fef2f2; color: #9ca3af; }
+
+    /* ── ステータスバッジ ── */
+    .s-best { color: #15803d; font-weight: 700; font-size: 16px; }
+    .s-good { color: #0369a1; font-weight: 700; font-size: 15px; }
+    .s-warn { color: #d97706; font-weight: 700; font-size: 15px; }
+    .s-bad  { color: #dc2626; font-weight: 700; font-size: 15px; }
+
+    /* ── コールアウト ── */
+    .callout {
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 18px 0;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .callout.info    { background: #eff6ff; border-left: 4px solid #3b82f6; color: #1e40af; }
+    .callout.success { background: #f0fdf4; border-left: 4px solid #22c55e; color: #14532d; }
+    .callout.warning { background: #fffbeb; border-left: 4px solid #f59e0b; color: #78350f; }
+    .callout.danger  { background: #fef2f2; border-left: 4px solid #ef4444; color: #7f1d1d; }
+    .callout > strong { display: block; font-size: 15px; margin-bottom: 6px; }
+
+    /* ── フェーズブロック ── */
+    .phase-block {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 22px 28px;
+      border-radius: 10px;
+      font-family: 'Menlo', 'Monaco', 'Courier New', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+      font-size: 13px;
+      line-height: 2;
+      margin: 16px 0;
+      white-space: pre-line;
+    }
+    .phase-block .ph { color: #fbbf24; font-weight: 700; }
+    .phase-block .st { color: #34d399; font-weight: 700; }
+    .phase-block .note-text { color: #94a3b8; }
+
+    /* ── 推奨ボックス ── */
+    .rec-summary-box {
+      background: linear-gradient(135deg, #0f172a, #1e3a5f);
+      color: white;
+      padding: 24px 28px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    .rec-summary-box .label { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+    .rec-summary-box .tools { font-size: 17px; font-weight: 800; color: #fbbf24; margin-bottom: 6px; }
+    .rec-summary-box .cost  { font-size: 14px; color: #cbd5e1; }
+
+    /* ── コスト強調 ── */
+    .cost-big { font-size: 22px; font-weight: 800; color: #dc2626; }
+    .cost-sub { font-size: 13px; color: #64748b; }
+
+    /* ── 優先度ラベル ── */
+    .pri-h { display: inline-block; background: #fee2e2; color: #991b1b; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-right: 4px; }
+    .pri-m { display: inline-block; background: #fef3c7; color: #92400e; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-right: 4px; }
+    .pri-l { display: inline-block; background: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-right: 4px; }
+
+    /* ── TODOリスト ── */
+    .todo-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 14px;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 14px;
+    }
+    .todo-item:last-child { border-bottom: none; }
+    .todo-item::before {
+      content: '';
+      display: block;
+      width: 15px;
+      height: 15px;
+      min-width: 15px;
+      border: 1.5px solid #94a3b8;
+      border-radius: 3px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ── ツールバッジ ── */
+    .tool { display: inline-block; background: #dbeafe; color: #1d4ed8; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin: 1px; }
+    .tool.green { background: #dcfce7; color: #15803d; }
+    .tool.amber { background: #fef3c7; color: #92400e; }
+
+    /* ── Notion注記 ── */
+    .notion-note {
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .service-link {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #3b82f6;
+      text-decoration: none;
+      padding: 1px 7px;
+      border: 1px solid #bfdbfe;
+      border-radius: 4px;
+      margin-left: 8px;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .service-link:hover { background: #eff6ff; }
+
+    p { margin: 12px 0; }
+    ul, ol { padding-left: 24px; }
+    li { margin-bottom: 5px; }
+    strong { color: #0f172a; }
+    hr { border: none; border-top: 2px solid #e2e8f0; margin: 40px 0; }
+
+    /* ── 承認ボックス ── */
+    .doc-header .approval-box {
+      margin-top: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-left: 4px solid #34d399;
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+    }
+    .doc-header .approval-body {
+      font-size: 14px;
+      color: #f1f5f9;
+      line-height: 1.8;
+    }
+    .doc-header .approval-action {
+      margin-top: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #34d399;
+    }
+
+    @media print {
+      body { background: white; }
+      .doc-header {
+        background: #0f172a !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .card { box-shadow: none; break-inside: avoid; }
+      .phase-block, .rec-summary-box {
+        background: #0f172a !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      a { color: inherit; text-decoration: none; }
+      .toc { break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ══════════════ ヘッダー ══════════════ -->
+  <div class="doc-header">
+    <div class="meta">2026年5月31日時点</div>
+    <h1>SaaS選定レポート</h1>
+    <div class="rec-box">
+      <div class="rec-label">現時点の推奨構成</div>
+      <div class="rec-tools">LOYCUS（LINE×kintone連携） + amptalk + Yoom（商談録音AI） + Pons（地図プラグイン）</div>
+      <div class="rec-cost">月額概算：237,500〜287,500円 / 月（LOYCUSは1年契約）　／　初期費用：419,500〜519,500円　※価格交渉の余地あり</div>
+    </div>
+    <div class="approval-box">
+      <div class="rec-label">ご確認いただきたいこと</div>
+      <div class="approval-body">使用ツールの方向性（上記推奨構成）と、今後の進め方についてご承認をお願いします。</div>
+      <div class="approval-action">▶ 価格交渉を1〜2週間以内に実施し、最終的な価格をご報告した後に実装を開始する想定です。</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 目次 ══════════════ -->
+  <div class="toc">
+    <div class="toc-title">目次</div>
+    <div class="toc-grid">
+      <a href="#sec1">1. SaaSを活用する理由と今後の方向性</a>
+      <a href="#sec7">7. LINE×kintone連携（定期点検管理）</a>
+      <a href="#sec2">2. 今回解決したい課題と実現手段</a>
+      <a href="#sec8">8. 商談録音AI（amptalk + Yoom）</a>
+      <a href="#sec3">3. 前提：社内の業務実態</a>
+      <a href="#sec9">9. 地図プラグイン（営業エリア可視化）</a>
+      <a href="#sec4">4. フロー全体像（現状 vs 導入後）</a>
+      <a href="#sec10">10. コスト試算</a>
+      <a href="#sec5">5. 提案内容のサマリー</a>
+      <a href="#sec11">11. 残課題・懸念事項</a>
+      <a href="#sec6">6. LINE×kintone連携（アポイント・商談管理）</a>
+      <a href="#sec12">12. 今後のTODO</a>
+    </div>
+  </div>
+
+
+  <!-- ══════════════ PART 1: 前提の整理 ══════════════ -->
+  <div class="part-marker premise">前提の整理</div>
+  <h1 class="section-title">前提の整理</h1>
+
+
+  <!-- ─── セクション 1 ─── -->
+  <div class="card" id="sec1">
+    <h2><span class="num">1</span> SaaSを活用する理由と今後の方向性</h2>
+
+    <h3>今回の提案</h3>
+    <div class="callout success">
+      直近はSaaSを利用し、追ってAI開発した独自ソフトにリプレイスしていく
+    </div>
+
+    <h3>背景</h3>
+    <p>今回の要件（LINE×kintone連携・AI議事録・地図表示）は、原理的にはAIや独自開発で実現できるものが多い。坂口（または別の開発者）がAIを活用してカスタム実装するという選択肢もありうる。</p>
+    <p>ただし、<strong>現時点でSaaSを優先すべき</strong>と考える。理由は以下の通り。</p>
+
+    <table>
+      <thead><tr><th>観点</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td><strong>要件の不確実性</strong></td><td>システム刷新時の業務フローや機能要件が固まっていない。実際に使ってみないと実際は何が必要かがわからない</td></tr>
+        <tr><td><strong>効果の不確実性</strong></td><td>導入して本当に現場に使われるか、成果が出るかが見えていない段階</td></tr>
+        <tr><td><strong>開発が分かる人員のリソース</strong></td><td>開発・保守・管理の工数が継続的に発生する独自開発は、月80時間ほどは必要。人員確保が確約されていない現状だとリスクが高い</td></tr>
+        <tr><td><strong>サポート体制</strong></td><td>SaaSには基本カスタマーサクセスがついており、トラブル時の対応・運用相談ができる。独自ツールには保守してくれる存在がいない</td></tr>
+      </tbody>
+    </table>
+
+    <p>まずはSaaSで要件を明確化し、効果を実証する。ツールで業務フローを整えながら「本当に必要な機能」「現場で使われる機能」を見極める。その後、システム開発・管理ができる人員が確保できた段階で、独自ツール（AI開発）に置き換えていく流れがベター。</p>
+
+    <div class="phase-block">
+<span class="ph">Phase 1：</span> SaaSを活用して機能を実装（4〜5か月）
+<span class="ph">Phase 2：</span> システムを改善しつつ、要件を明確化。並行して開発人員（ビジネスと開発を横断可能なメンバー）を確保（3〜4か月）
+<span class="ph">Phase 3：</span> 要件が固まり、専任の開発・管理担当を確保できれば独自開発へ徐々にリプレイス（3〜4か月）</div>
+  </div>
+
+
+  <!-- ─── セクション 2 ─── -->
+  <div class="card" id="sec2">
+    <h2><span class="num">2</span> 今回解決したい課題と実現手段</h2>
+    <p>今回のシステム導入で解決したい課題は以下の6点。</p>
+
+    <table>
+      <thead><tr><th>#</th><th>解決したい課題</th><th>実現手段</th><th>使うもの</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:800;color:#3b82f6;">A</td>
+          <td><strong>商談・定期点検が実際に行われたかを管理したい</strong></td>
+          <td>顧客にLINEを登録してもらい、フォームを送付。顧客がフォームに回答することで「実施済み」を記録・管理する</td>
+          <td><span class="tool">LINE×kintone連携</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:#3b82f6;">B</td>
+          <td><strong>個人情報入力を効率化したい</strong>（現状は商談後にクローザーが手入力）</td>
+          <td>フォームで顧客自身に個人情報を入力してもらい、kintoneへ自動連携。クローザーの手入力コストを削減</td>
+          <td><span class="tool">LINE×kintone連携</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:#3b82f6;">C</td>
+          <td><strong>リマインド・アップセルを自動化したい</strong>（将来的に）</td>
+          <td>kintoneに蓄積されたデータを元に、LINEで自動リマインドや定期的なアップセル提案を送る。未入金督促・再商談設定なども対象</td>
+          <td><span class="tool">LINE×kintone連携</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:#7c3aed;">D</td>
+          <td><strong>アポ・商談・定期点検でのトラブルを回避したい</strong>（言った言わない問題）</td>
+          <td>音声・会話内容を蓄積し、記録として残す</td>
+          <td><span class="tool green">商談録音AI</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:#7c3aed;">E</td>
+          <td><strong>アップセルトークの質を向上させたい</strong></td>
+          <td>蓄積した会話データからハイパフォーマーのトークを定義し、メンバーにフィードバックする</td>
+          <td><span class="tool green">商談録音AI</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:#d97706;">F</td>
+          <td><strong>アポ獲得の効率を上げたい</strong></td>
+          <td>kintoneに登録されている顧客データと地図を連携し、再訪問すべきエリア・顧客を素早く特定する</td>
+          <td><span class="tool amber">地図プラグイン</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>優先度と進め方</h3>
+    <ul>
+      <li><strong>A・B・D・E・F</strong>：業務改善効果が明確で優先度高。まず実装して効果を検証する</li>
+      <li><strong>C</strong>：LINEとkintoneの連携が整った後のステップ。初期から設計に組み込んでおく</li>
+    </ul>
+  </div>
+
+
+  <!-- ─── セクション 3 ─── -->
+  <div class="card" id="sec3">
+    <h2><span class="num">3</span> 前提：社内の業務実態（2026-05-20 社内MTGで確認）</h2>
+
+    <table>
+      <thead><tr><th>項目</th><th>実態</th></tr></thead>
+      <tbody>
+        <tr><td><strong>アポインター</strong></td><td>40名（インターン生が全員で1アカウントを共有するケースあり）</td></tr>
+        <tr><td><strong>クローザー</strong></td><td>13名（インターン生が全員で1アカウントを共有するケースあり）</td></tr>
+        <tr><td><strong>点検メンバー</strong></td><td>6名</td></tr>
+        <tr><td><strong>住所データ</strong></td><td>現状なし。位置情報（GoogleマップリンクURL）のみkintoneに登録。住所はクローザーが商談後に手入力</td></tr>
+        <tr><td><strong>LINE状況</strong></td><td>LINE公式アカウントを保有・使用中。kintone連携はしていない</td></tr>
+        <tr><td><strong>LINE登録対象</strong></td><td><strong>成約顧客のみ</strong>（アポイント顧客全員には登録させない方針）→ 友達数は現状約1,800人、将来5,000〜10,000人規模</td></tr>
+        <tr><td><strong>電話番号フォーマット</strong></td><td>ハイフンありで統一済み（LINE連携時のフォーマット変換不要）</td></tr>
+        <tr><td><strong>商談の時間感</strong></td><td><strong>カツカツ寄り</strong>（LINEフォームは短時間で完結する設計が必要）</td></tr>
+        <tr><td><strong>屋外録音ニーズ</strong></td><td>初回アポ（屋外・ピンポン時）でも録音できると助かる（商談録音に加えて）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ─── セクション 4 ─── -->
+  <div class="card" id="sec4">
+    <h2><span class="num">4</span> フロー全体像（現状 vs 導入後）</h2>
+
+    <h3>メインフロー比較</h3>
+    <table>
+      <thead><tr><th>ステップ</th><th>現状</th><th>導入後</th><th>使うツール</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>訪問エリア選定</strong></td>
+          <td>属人的な判断・記憶ベース</td>
+          <td>kintone地図で失注リストを確認し、効率的にエリアを選定</td>
+          <td><span class="tool amber">Pons</span></td>
+        </tr>
+        <tr>
+          <td><strong>訪問・アポ獲得</strong></td>
+          <td>ピンポン→面談→アポ獲得</td>
+          <td>変化なし。アポ時の録音は要確認</td>
+          <td>（amptalk 検討中）</td>
+        </tr>
+        <tr>
+          <td><strong>アポ情報入力</strong></td>
+          <td>紙→スマホでkintone「アポ管理シート」に転記</td>
+          <td>変化なし</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>確認連絡（完了1）</strong></td>
+          <td>翌日：バックオフィスが電話確認</td>
+          <td><strong>LINEで自動リマインドに置き換え</strong>（検討中）</td>
+          <td><span class="tool">LOYCUS</span></td>
+        </tr>
+        <tr>
+          <td><strong>確認連絡（完了2）</strong></td>
+          <td>前日：バックオフィスが電話確認</td>
+          <td><strong>LINEで自動リマインドに置き換え</strong>（検討中）</td>
+          <td><span class="tool">LOYCUS</span></td>
+        </tr>
+        <tr>
+          <td><strong>商談（録音）</strong></td>
+          <td>担当者の記憶・メモ頼り</td>
+          <td><strong>録音しながら商談 → AIが自動で文字起こし・要約 → kintone議事録アプリに連携</strong></td>
+          <td><span class="tool green">amptalk</span> + <span class="tool green">Yoom</span></td>
+        </tr>
+        <tr>
+          <td><strong>個人情報取得</strong></td>
+          <td>申込用紙に手書き → 後日クローザーが入力</td>
+          <td><strong>成約後にQRコードでLINE友達登録 → フォームで入力 → kintone自動連携</strong></td>
+          <td><span class="tool">LOYCUS</span></td>
+        </tr>
+        <tr>
+          <td><strong>商談結果入力</strong></td>
+          <td>クローザーがkintoneに手入力（忘れ・漏れ多い）</td>
+          <td>変化なし。商談アプリ×議事録アプリのデータ連携は手動</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>定期点検確認（完了1・2）</strong></td>
+          <td>バックオフィスが電話確認</td>
+          <td><strong>LINEで自動リマインドに置き換え</strong>（検討中）</td>
+          <td><span class="tool">LOYCUS</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>今後実施する内容（CのステップをLINEで実現）</h3>
+    <div class="callout info">LINE×kintone連携が整った後に実装する。</div>
+
+    <table>
+      <thead><tr><th>アクション</th><th>実現手段</th></tr></thead>
+      <tbody>
+        <tr><td>kintoneの条件で絞ったリストへの一斉送信</td><td>LINE × kintone のセグメント配信</td></tr>
+        <tr><td>アポキャンセル顧客への再商談設定</td><td>LINEで自動フロー送信</td></tr>
+        <tr><td>未入金顧客への督促</td><td>LINEで自動メッセージ</td></tr>
+        <tr><td>既存顧客へのキャンペーン告知</td><td>LINE × kintone のセグメント配信</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ══════════════ PART 2: 提案の概要 ══════════════ -->
+  <div class="part-marker summary">提案の概要</div>
+  <h1 class="section-title green">提案の概要</h1>
+
+
+  <!-- ─── セクション 5 ─── -->
+  <div class="card" id="sec5">
+    <h2><span class="num">5</span> 提案内容のサマリー</h2>
+
+    <table>
+      <thead><tr><th>提案</th><th>有力候補</th><th>確度</th><th>初期費用</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr class="winner">
+          <td>LINE×kintone連携（アポイント・商談管理）</td>
+          <td><strong>LOYCUS</strong> <a href="https://loycus.jp/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></td>
+          <td><span class="s-best">◎</span></td>
+          <td>150,000〜200,000円</td>
+          <td>要件を満たし、かつ価格が最安値</td>
+        </tr>
+        <tr class="winner">
+          <td>LINE×kintone連携（定期点検管理）</td>
+          <td>LOYCUSでカバー</td>
+          <td><span class="s-best">◎</span></td>
+          <td>追加費用なし</td>
+          <td>アポイント・商談管理と同ツール</td>
+        </tr>
+        <tr class="winner">
+          <td>LINE活用によるリマインド・アップセル自動化（将来）</td>
+          <td>LOYCUSでカバー</td>
+          <td><span class="s-best">◎</span></td>
+          <td>追加費用なし</td>
+          <td>LINE×kintone連携整備後に実装</td>
+        </tr>
+        <tr class="winner">
+          <td>商談録音AI</td>
+          <td><strong>amptalk</strong> <a href="https://amptalk.co.jp/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a> + <strong>Yoom</strong> <a href="https://yoom.fun/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></td>
+          <td><span class="s-best">◎</span></td>
+          <td>70,000円（amptalk）</td>
+          <td>amptalkで録音・分析、Yoomでkintone連携が最安値</td>
+        </tr>
+        <tr>
+          <td>地図プラグイン（営業エリア可視化）</td>
+          <td><strong>Pons</strong>（条件付き） <a href="https://kintone-sol.cybozu.co.jp/integrate/pons001.html" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></td>
+          <td><span class="s-warn">△〜◎</span></td>
+          <td>49,500円（買い切り）</td>
+          <td>Ponsは買い切り。表示の方法は運用を要検討</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="rec-summary-box">
+      <div class="label">推奨構成</div>
+      <div class="tools">LOYCUS（LINE×kintone連携） + amptalk + Yoom（商談録音AI） + Pons（地図プラグイン）</div>
+      <div class="cost">月額概算：<strong style="color:#fbbf24;">237,500〜287,500円 / 月</strong>（LOYCUSは1年契約）　※価格交渉の余地あり</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════ PART 3: 提案の詳細 ══════════════ -->
+  <div class="part-marker detail">提案の詳細</div>
+  <h1 class="section-title amber">提案の詳細</h1>
+
+
+  <!-- ─── セクション 6 ─── -->
+  <div class="card" id="sec6">
+    <h2><span class="num">6</span> LINE×kintone連携（アポイント・商談管理）</h2>
+
+    <h3>選定の前提・比較観点</h3>
+    <table>
+      <thead><tr><th>比較の観点</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td><strong>kintoneとの双方向連携</strong></td><td>kintone→LINE送信・LINE入力→kintone反映の両方が必要</td></tr>
+        <tr><td><strong>パラメーター方式</strong></td><td>フォーム入力なしでも顧客情報とkintoneを自動紐づけできるかが効率化において重要</td></tr>
+        <tr><td><strong>ノーコード設定</strong></td><td>導入後の運用負荷を下げるため、設定・変更が自社でできることを重視</td></tr>
+        <tr><td><strong>比較したツール</strong></td><td>LOYCUS・KUZEN・Yoom</td></tr>
+      </tbody>
+    </table>
+
+    <h3>要件</h3>
+    <ul>
+      <li>商談成約後、クローザーが顧客にLINE友達登録してもらう（QRコード等）</li>
+      <li>友達登録と同時にフォームでkintoneデータと連携。フォームで顧客が個人情報（名前・電話番号等）を入力し、kintoneに自動連携</li>
+      <li>商談日の前日・数日前に自動でLINEリマインドを送信（確認電話の代替）</li>
+      <li>今後の用途：キャンペーン告知・アポキャンセル顧客への再商談設定・未入金督促</li>
+    </ul>
+
+    <h3>現状フロー vs 導入後フロー</h3>
+    <table>
+      <thead><tr><th>ステップ</th><th>現状</th><th>導入後</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>確認連絡（完了1）</td>
+          <td>翌日：バックオフィスが電話確認</td>
+          <td><strong>LINE自動リマインドに置き換え</strong>（バックオフィスの工数削減）</td>
+        </tr>
+        <tr>
+          <td>確認連絡（完了2）</td>
+          <td>前日：バックオフィスが電話確認</td>
+          <td><strong>LINE自動リマインドに置き換え</strong></td>
+        </tr>
+        <tr>
+          <td>商談</td>
+          <td>クローザーが訪問・商談</td>
+          <td>変化なし</td>
+        </tr>
+        <tr>
+          <td>顧客情報取得</td>
+          <td>申込用紙に手書き → 後日クローザーが入力</td>
+          <td><strong>成約後にQRコードでLINE友達登録 → フォームで自動取得 → kintone自動連携</strong></td>
+        </tr>
+        <tr>
+          <td>商談結果入力</td>
+          <td>クローザーが後日kintone「商談管理シート」に入力（忘れ・漏れが多い）</td>
+          <td>変化なし（商談録音AIで一部補完）</td>
+        </tr>
+        <tr>
+          <td>フォローアップ</td>
+          <td>バックオフィスが個別に電話・メール</td>
+          <td><strong>LINEで自動送信</strong>（キャンペーン・督促・再商談）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>このフローのポイントになる機能</h3>
+    <table>
+      <thead><tr><th>ポイント</th><th>内容</th><th>関連するSaaS機能</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>パラメーター方式</strong></td>
+          <td>顧客に手入力させずにkintoneと自動紐づけ。電話番号等をURLに埋め込み、QRコードスキャンだけで連携完了</td>
+          <td>LOYCUSのURLデータ連携オプション、KUZENのパラメーターオプション</td>
+        </tr>
+        <tr>
+          <td><strong>日付トリガーのワークフロー</strong></td>
+          <td>kintoneの商談日フィールドを見て、○日前に自動でLINEメッセージを送る仕組み</td>
+          <td>LOYCUS・KUZENともに対応。条件はAND/OR最大5項目</td>
+        </tr>
+        <tr>
+          <td><strong>kintone複数アプリ連携</strong></td>
+          <td>アポ管理シートと商談管理シートが別アプリの場合に影響。標準連携は1アプリのみ</td>
+          <td>LOYCUSは標準連携1アプリ（複数はAPI連携が必要）</td>
+        </tr>
+        <tr>
+          <td><strong>セグメント配信</strong></td>
+          <td>成約済み・キャンセル・未入金など、kintoneのステータスで対象を絞って一斉送信</td>
+          <td>LOYCUS・KUZENともに対応</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>推奨：LOYCUS vs KUZEN vs Yoom</h3>
+
+    <div class="callout success">
+      <strong>LOYCUS（第一候補 ◎）</strong> <a href="https://loycus.jp/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a>
+    </div>
+    <table>
+      <thead><tr><th>要件</th><th>対応</th><th>メモ</th></tr></thead>
+      <tbody>
+        <tr class="winner"><td>QRコード→友達登録→フォーム→kintone反映</td><td><span class="s-best">◎</span></td><td>パラメーター方式で入力なし自動連携可</td></tr>
+        <tr class="winner"><td>商談日前の自動リマインド</td><td><span class="s-best">◎</span></td><td>kintoneの日付フィールドを条件に設定可。最大5項目AND/OR</td></tr>
+        <tr class="winner"><td>セグメント配信</td><td><span class="s-best">◎</span></td><td>kintone連携済みであれば項目絞り込みで配信可</td></tr>
+        <tr><td>kintone内でLINEメッセージ確認</td><td><span class="s-bad">✕</span></td><td>LOYCUSの管理画面上でのみ確認・送受信可能</td></tr>
+        <tr><td>フォームへの事前入力</td><td><span class="s-bad">✕</span></td><td>URLデータ連携で友達追加時に情報格納は可能（入力なし紐づけの代替）</td></tr>
+        <tr><td>kintone複数アプリ連携</td><td><span class="s-warn">△</span></td><td>標準連携は1アプリのみ。複数はAPI連携で対応（費用別途）</td></tr>
+      </tbody>
+    </table>
+    <div class="callout info">
+      料金：初期15〜20万円、月額15〜20万円（1年契約） ※詳細価格は申込時に見積り<br>
+      友達数：成約顧客のみ → 1万人未満のベース料金内で確定（料金リスク解消）
+    </div>
+
+    <hr>
+
+    <div class="callout info">
+      <strong>KUZEN（評価完了 ○ — LOYCUSより高コスト）</strong> <a href="https://kuzen.io/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a>
+    </div>
+    <table>
+      <thead><tr><th>要件</th><th>対応</th><th>メモ</th></tr></thead>
+      <tbody>
+        <tr><td>QRコード→友達登録→フォーム→kintone反映</td><td><span class="s-best">◎</span></td><td>対応。新規レコード作成も可能</td></tr>
+        <tr><td>パラメーター付きURL発行</td><td><span class="s-good">○</span></td><td>オプション扱い（+<strong>月額7万円</strong>）</td></tr>
+        <tr><td>商談日前の自動リマインド</td><td><span class="s-best">◎</span></td><td>AND/OR複数条件対応</td></tr>
+        <tr><td>フォームへの事前入力</td><td><span class="s-best">◎</span></td><td>KUZEN内に既存情報があれば入力済み表示・設問省略（LOYCUSにはない機能）</td></tr>
+        <tr><td>kintone連携リアルタイム性</td><td><span class="s-best">◎</span></td><td>リアルタイム連携と確認済み</td></tr>
+      </tbody>
+    </table>
+    <div class="callout info">
+      料金：初期20万円、パラメーターオプション月額7万円、月額25万円〜（1年契約）
+    </div>
+
+    <hr>
+
+    <div class="callout info">
+      <strong>Yoom（LINE×kintone単体では不採用）</strong> <a href="https://yoom.fun/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a>
+      LINE×kintoneが可能ではある。しかし、メインツールとしてはLOYCUSに劣る（パラメーター不可・フロー構築工数大・kintone × LINE個別アカウント表示が不可）。<br>
+      商談録音AI（amptalk）のkintone連携用としては導入予定。詳細は8章を参照。
+    </div>
+
+    <hr>
+
+    <h3>LOYCUS vs KUZEN 比較</h3>
+    <table>
+      <thead><tr><th>観点</th><th>LOYCUS</th><th>KUZEN</th></tr></thead>
+      <tbody>
+        <tr><td>初期費用</td><td>15〜20万円</td><td>20万円</td></tr>
+        <tr class="winner"><td><strong>月額</strong></td><td><strong>15〜20万円</strong></td><td>25万円〜（パラメーター込みで32万円〜）</td></tr>
+        <tr class="winner"><td><strong>パラメーター方式</strong></td><td><span class="s-best">◎</span>（標準含む）</td><td><span class="s-good">○</span>（月額オプション+7万円）</td></tr>
+        <tr><td>フォーム事前入力</td><td><span class="s-bad">✕</span></td><td><span class="s-best">◎</span></td></tr>
+        <tr><td>kintone連携リアルタイム性</td><td><span class="s-best">◎</span></td><td><span class="s-best">◎</span></td></tr>
+        <tr><td>kintone複数アプリ</td><td>API連携で対応</td><td>API連携で対応</td></tr>
+        <tr><td>友達数料金リスク</td><td>なし（1万人未満で確定）</td><td>なし</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout success">
+      機能としては大きな差分なし。価格交渉で安くなった方で良いが、金額感としてKUZENのほうが安くなることはないと思われる。
+    </div>
+
+    <h3>実装工数の目安（初期要件のみ）</h3>
+    <table>
+      <thead><tr><th>作業</th><th>工数目安</th></tr></thead>
+      <tbody>
+        <tr><td>要件整理・設計（kintoneアプリ構成の確認含む）</td><td>8〜16時間</td></tr>
+        <tr><td>LOYCUS初期設定・kintone連携設定</td><td>8〜16時間</td></tr>
+        <tr><td>パラメーターURL設定・QRコード作成</td><td>4〜8時間</td></tr>
+        <tr><td>テスト・修正・現場確認</td><td>8〜16時間</td></tr>
+        <tr class="winner"><td><strong>合計</strong></td><td><strong>約36〜48時間</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ─── セクション 7 ─── -->
+  <div class="card" id="sec7">
+    <h2><span class="num">7</span> LINE×kintone連携（定期点検管理）</h2>
+
+    <div class="callout success">
+      6章（アポイント・商談管理）と同じ <strong>LOYCUS</strong> でカバーできるため、追加ツールの選定は不要。LOYCUSの設定を拡張する形で実装する。
+    </div>
+
+    <h3>要件</h3>
+    <ul>
+      <li>点検完了後、顧客のLINEに自動でアンケートを送信</li>
+      <li>顧客が「点検完了・問題なし」を入力 → kintoneに自動反映</li>
+      <li>点検未実施案件に自動でフォローアップ通知</li>
+    </ul>
+
+    <h3>現状フロー vs 導入後フロー</h3>
+    <table>
+      <thead><tr><th>ステップ</th><th>現状</th><th>導入後</th></tr></thead>
+      <tbody>
+        <tr><td>点検予約</td><td>バックオフィスが電話でアポ取得</td><td><strong>LINEで自動案内・アポ設定フロー</strong></td></tr>
+        <tr><td>完了確認</td><td>点検担当者がkintoneに手入力</td><td>kintoneのステータス変更 → <strong>自動でLINEアンケート送信</strong></td></tr>
+        <tr><td>顧客確認</td><td>確認手段なし</td><td><strong>顧客がLINEで「完了・問題なし」を選択 → kintone自動反映</strong></td></tr>
+        <tr><td>フォローアップ</td><td>手動で確認・連絡</td><td>未回答の場合は<strong>数日後に自動でLINEフォローアップ</strong></td></tr>
+        <tr><td>次回点検アポ</td><td>点検時に次のアポを口頭で取る</td><td>点検完了後にLINEで次回案内を自動送信</td></tr>
+      </tbody>
+    </table>
+
+    <h3>実装工数の目安</h3>
+    <table>
+      <thead><tr><th>作業</th><th>工数目安</th></tr></thead>
+      <tbody>
+        <tr><td>定期点検用ワークフロー設定（6章の追加作業）</td><td>4〜8時間</td></tr>
+        <tr><td>アンケート設計・kintone反映設定</td><td>4〜8時間</td></tr>
+        <tr><td>テスト・修正</td><td>4〜8時間</td></tr>
+        <tr class="winner"><td><strong>合計</strong></td><td><strong>約12〜16時間</strong>（6章と重なる部分あり）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ─── セクション 8 ─── -->
+  <div class="card" id="sec8">
+    <h2><span class="num">8</span> 商談録音AI（amptalk + Yoom）</h2>
+
+    <div class="callout info">
+      <strong>前提：amptalk単体では導入できず、Yoom（iPaaS）とセットで導入する必要がある</strong>
+      amptalkはkintoneへの直接連携を持たない。amptalkが録音・分析を担い、Yoomがamptalkのデータをkintoneに自動連携する。amptalkは渡辺さん顧問先や坂口勤務先での導入実績もあり、信頼性が高い。
+    </div>
+
+    <h3>他ツールとの比較</h3>
+    <table>
+      <thead><tr><th>ツール</th><th>月額</th><th>特徴</th><th>不採用の理由</th></tr></thead>
+      <tbody>
+        <tr class="winner">
+          <td><strong>amptalk</strong> <a href="https://amptalk.co.jp/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></td>
+          <td>4,500〜6,400円/ユーザー</td>
+          <td>営業特化。スマホで対面録音可。トーク分析・話者分離が強み</td>
+          <td><strong style="color:#15803d;">採用</strong></td>
+        </tr>
+        <tr>
+          <td>Notta <a href="https://www.notta.ai/ja" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></td>
+          <td>2,000円前後</td>
+          <td>汎用AI議事録。コストが安い</td>
+          <td>定性評価（トーク分析・ハイパフォーマー比較）が難しい。営業特化の分析機能がない</td>
+        </tr>
+        <tr class="excluded">
+          <td>Front Agent <a href="https://umeecorp.com/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></td>
+          <td>初期150万円＋月30万円</td>
+          <td>kintone連携に強い</td>
+          <td>コンサルパッケージ前提で高額すぎる</td>
+        </tr>
+        <tr>
+          <td>安価なAI議事録全般</td>
+          <td>〜2,000円</td>
+          <td>文字起こし特化</td>
+          <td><strong>対面録音には1人1台のボイスレコーダーが別途必要なケースが多い</strong>。スマホアプリ単体での対面録音に対応していないものが多い</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <strong>将来的な切り替えの検討</strong>
+      まずはamptalkを使って定性（音声）から切り口を作る（Step 1〜2）。AIによる評価がうまく機能し始めたら、Step 3で分析ロジックをAI APIで自作する段階で、録音のみのツール（より安価）への切り替えも検討の余地あり。<br><br>
+      <strong>移行時の確認事項</strong>：amptalkからの移行を前提とした設計・データ移行については未確認。別ツールへの切り替えを検討する際は、amptalkに蓄積された録音・分析データのエクスポート方法を事前に確認する必要がある。
+    </div>
+
+    <h3>ハイパフォーマー比較の進め方</h3>
+    <div class="phase-block">
+<span class="st">Step 1：</span> まずは音声（定性）から切り口を作る
+         → amptalkを使い、実際の商談を録音・文字起こし。
+           話者比率・トピック分析・NGワードなどから「ハイパフォーマーの特徴」の仮説を立てる
+
+<span class="st">Step 2：</span> その切り口で定量分析ができるかを確認する
+         → amptalkの分析機能でどこまで自動計測できるか、
+           何を手動で確認する必要があるかを把握する
+
+<span class="st">Step 3：</span> レポートの自動化を検討する
+         → 定量化できた指標をYoom経由でkintoneに連携し、
+           AIのAPIを活用して週次・月次レポートの自動生成を構築する</div>
+
+    <h3>要件</h3>
+    <ul>
+      <li>対面商談（テーブルを挟んだ室内）をスマホで録音</li>
+      <li><strong>初回アポ（屋外・ピンポン時）でも録音できると助かる</strong>（屋外録音の精度が重要）→ オペレーション的に実施可能か要検討</li>
+      <li>文字起こし後、AIがハイパフォーマーとローパフォーマーのトークを比較分析</li>
+      <li>特定のNGトークが出たときにアラートを出す（Slack通知）</li>
+      <li>kintoneの顧客レコードに連携</li>
+    </ul>
+
+    <h3>現状フロー vs 導入後フロー</h3>
+    <table>
+      <thead><tr><th>ステップ</th><th>現状</th><th>導入後</th></tr></thead>
+      <tbody>
+        <tr><td>商談の記録</td><td>担当者の記憶・メモ頼り。kintone入力を忘れるメンバーが多い</td><td>スマホアプリで録音開始 → AIが自動で文字起こし・分析</td></tr>
+        <tr><td>顧客との紐づけ</td><td>なし</td><td>商談後に <strong>kintoneレコードを手動選択</strong>（完全自動化は不可）</td></tr>
+        <tr><td>分析・フィードバック</td><td>商談がブラックボックス化。ハイパフォーマーとの差が見えない</td><td>話者比率・トピック分析でハイパフォーマーの特徴を自動抽出（Step 1〜2）</td></tr>
+        <tr><td>NGトーク検知</td><td>なし</td><td>AIオートタグ + Slack通知で自動検知が可能</td></tr>
+        <tr><td>kintoneへの記録</td><td>クローザーが手入力（ヌケモレがあり得る）</td><td>amptalk要約 + Yoom経由でkintoneに議事録が自動連携</td></tr>
+        <tr><td>育成フィードバック</td><td>属人的。マネージャーの判断依存</td><td>優秀な商談をライブラリ保存 → コメント・@メンションでフィードバック</td></tr>
+      </tbody>
+    </table>
+
+    <h3>amptalk（確定候補 ◎） <a href="https://amptalk.co.jp/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></h3>
+    <table>
+      <thead><tr><th>要件</th><th>対応</th><th>メモ</th></tr></thead>
+      <tbody>
+        <tr class="winner"><td>対面商談録音（室内・テーブル越し）</td><td><span class="s-best">◎</span></td><td>対面商談特化の自社AI。精度が高い</td></tr>
+        <tr><td>屋外録音（初回アポ）</td><td><span class="s-warn">△</span></td><td>話者はほぼ2名だが屋外精度は要確認</td></tr>
+        <tr class="winner"><td>話者分離</td><td><span class="s-best">◎</span></td><td>最大30名まで対応</td></tr>
+        <tr class="winner"><td>ハイパフォーマー比較分析</td><td><span class="s-best">◎</span></td><td>話者比率・トピック分析で特徴を抽出（まず定性から始める）</td></tr>
+        <tr class="winner"><td>NGワードのアラート</td><td><span class="s-best">◎</span></td><td>AIオートタグ + Slack通知で自動検知</td></tr>
+        <tr><td>kintone連携</td><td><span class="s-good">○</span></td><td>Yoom経由（API連携）。直接連携ではない</td></tr>
+        <tr><td>対面商談の自動紐づけ</td><td><span class="s-bad">✕</span></td><td><strong>毎回手動入力が必要</strong>（停止後にポップアップで選択）</td></tr>
+        <tr><td>週次レポート自動生成</td><td><span class="s-warn">△</span></td><td>SaaSとして提供なし。Step 3でAIのAPIを活用して自作を検討</td></tr>
+      </tbody>
+    </table>
+
+    <h3>料金（確定）</h3>
+    <table>
+      <thead><tr><th>項目</th><th>金額</th></tr></thead>
+      <tbody>
+        <tr><td>初期費用</td><td>70,000円</td></tr>
+        <tr><td>Basicプラン</td><td>4,500円 / ユーザー / 月（年間契約）</td></tr>
+        <tr><td>Proプラン</td><td>6,400円 / ユーザー / 月（年間契約）</td></tr>
+        <tr><td>閲覧専用（マネージャー等）</td><td>800円 / ユーザー / 月</td></tr>
+        <tr><td>最低ライセンス</td><td>10ユーザーから</td></tr>
+      </tbody>
+    </table>
+
+    <h3>コスト試算（15名 Basicプラン）</h3>
+    <table>
+      <thead><tr><th>費目</th><th>月額</th><th>年間</th></tr></thead>
+      <tbody>
+        <tr><td>amptalk Basic × 15名</td><td>67,500円</td><td>810,000円</td></tr>
+        <tr><td>Yoom（amptalk→kintone連携用）</td><td>20,000円</td><td>240,000円</td></tr>
+        <tr><td>初期費用（amptalk）</td><td>-</td><td>70,000円</td></tr>
+        <tr class="winner"><td><strong>合計</strong></td><td><strong>87,500円</strong></td><td><strong>1,120,000円</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Yoom（amptalk→kintone連携用 ◎） <a href="https://yoom.fun/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></h3>
+    <table>
+      <thead><tr><th>役割</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td>amptalk分析結果の取得</td><td>Yoom内にamptalk連携の実装済みアクションあり。APIレスポンスのデータはほぼ全取得可能</td></tr>
+        <tr><td>kintoneへの書き込み</td><td>取得した要約・評価スコア等をkintoneの指定フィールドにPOST</td></tr>
+      </tbody>
+    </table>
+    <div class="callout info">
+      料金：ミニプラン（kintone連携を含む場合に必要）<strong>20,000円 / 環境 / 月</strong>（20名まで利用可能）<br>
+      <strong>注意：</strong>Yoomのフローボットを自分で構築する必要がある。kintoneのどのフィールドに何を書き込むかを事前に設計しておく必要がある。
+    </div>
+
+    <h3>実装工数の目安（初期実装）</h3>
+    <table>
+      <thead><tr><th>作業</th><th>工数目安</th></tr></thead>
+      <tbody>
+        <tr><td>amptalk初期設定</td><td>8〜16時間</td></tr>
+        <tr><td>Yoomフロー構築（amptalk→kintone連携）</td><td>8〜16時間</td></tr>
+        <tr><td>kintoneレコード連携設計（どのフィールドに何を入れるか）</td><td>8〜16時間</td></tr>
+        <tr class="winner"><td><strong>合計</strong></td><td><strong>約24〜48時間</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ─── セクション 9 ─── -->
+  <div class="card" id="sec9">
+    <h2><span class="num">9</span> 地図プラグイン（営業エリア可視化）</h2>
+
+    <h3>選定の前提・比較観点</h3>
+    <table>
+      <thead><tr><th>比較の観点</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td><strong>kintoneとの即時連携</strong></td><td>kintoneのデータが更新されたら地図にも反映されること。手動インポート不要</td></tr>
+        <tr><td><strong>Google マイマップとの比較</strong></td><td>Google マイマップは手動でピンを立てることができるが、kintoneとのリアルタイム連携ができない。更新のたびに手動作業が発生し、kintoneとの乖離が生まれるため候補外</td></tr>
+        <tr><td><strong>比較したツール</strong></td><td>Pons（買い切り）・カンタンマップ（月額）・MAPPLEプラグイン（件数制限で要件を満たさないため除外）</td></tr>
+      </tbody>
+    </table>
+
+    <h3>重要な前提と検討事項</h3>
+
+    <div class="callout info">
+      <strong>① 住所データの取得フロー</strong>
+      kintoneに登録されているのは住所ではなくGoogleマップリンクURL（<code>@緯度,経度</code>の形式）。地図プラグインでピンを表示するためには、このURLから緯度経度を取り出す必要がある。
+      <ul>
+        <li><strong>Ponsの場合</strong>：マップリンクURLの「@以降の緯度経度」をカスタマイズで処理する方法が有望（対応可能性あり）</li>
+        <li><strong>将来的に住所データが必要になる場合</strong>：Reverse Geocoding API（Googleマップ等）を使って緯度経度から住所を取得するフローの整備が必要になる</li>
+      </ul>
+    </div>
+
+    <div class="callout info">
+      <strong>② 表示粒度の検討</strong>
+      どのレベルの地図でデータを見るかによって、必要なデータと運用が変わる。
+    </div>
+    <table>
+      <thead><tr><th>粒度</th><th>使い方</th><th>必要なデータ</th></tr></thead>
+      <tbody>
+        <tr><td>都道府県レベル</td><td>広域のエリア傾向を把握</td><td>緯度経度（現状のマップリンクURLで対応可）</td></tr>
+        <tr><td>市区町村レベル</td><td>エリアを絞って訪問先を特定</td><td>緯度経度 or 住所</td></tr>
+        <tr><td>番地レベル</td><td>ピンで特定の家を表示</td><td>緯度経度 or 詳細住所</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <strong>③ アポアプリ vs 商談アプリの選択</strong>
+      地図に表示するデータをアポアプリから取るか、商談アプリから取るかで連携の設計が変わる。どのデータを地図で見たいかによって最適解が変わるため、「地図で何を確認したいか」を業務側と詳細に詰める必要がある。
+    </div>
+
+    <h3>Pons（第一候補 △〜◎） <a href="https://kintone-sol.cybozu.co.jp/integrate/pons001.html" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></h3>
+    <table>
+      <thead><tr><th>要件</th><th>対応</th><th>メモ</th></tr></thead>
+      <tbody>
+        <tr class="winner"><td>ピン表示（多件数）</td><td><span class="s-good">○</span></td><td>クラスタリング対応。15,000件は確認済み</td></tr>
+        <tr class="winner"><td>ステータス別色分け</td><td><span class="s-best">◎</span></td><td>3種類×5色=15パターン</td></tr>
+        <tr class="winner"><td>ピンクリックで詳細表示</td><td><span class="s-best">◎</span></td><td>kintoneレコード詳細・遷移ボタンも表示</td></tr>
+        <tr class="winner"><td>スマートフォン対応</td><td><span class="s-best">◎</span></td><td>対応あり</td></tr>
+        <tr><td>エリア指定フィルタ（円・多角形）</td><td><span class="s-bad">✕</span></td><td>不可。住所文字列検索のみ→一覧を選ぶ運用でカバー可能</td></tr>
+        <tr><td>GoogleマップリンクからピンURL</td><td><span class="s-warn">△</span></td><td>マップリンクからデータ取得する機能を作ることで可能</td></tr>
+        <tr class="winner"><td>現在地表示</td><td><span class="s-best">◎</span></td><td>対応あり</td></tr>
+        <tr class="winner"><td>ルート検索</td><td><span class="s-best">◎</span></td><td>対応あり</td></tr>
+      </tbody>
+    </table>
+    <div class="callout success">
+      料金：<strong>買い切り49,500円</strong>（Google Maps API不使用 → ランニングコスト0円）
+    </div>
+
+    <h3>カンタンマップ <a href="https://kantanmap.jp/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a> vs Pons 全項目比較</h3>
+    <div class="callout info">
+      <strong>方針</strong>：まずPonsで運用を確認し、エリア指定フィルタ等でPonsでは致命的に機能が不足する場合にカンタンマップへの切り替えを検討する。
+    </div>
+    <table>
+      <thead><tr><th>要件</th><th>Pons</th><th>カンタンマップ</th></tr></thead>
+      <tbody>
+        <tr><td>ピン表示（多件数）</td><td><span class="s-good">○</span> 15,000件確認済み</td><td><span class="s-warn">△</span> 最大5,000件/回（絞り込み利用推奨）</td></tr>
+        <tr><td>ステータス別色分け</td><td><span class="s-best">◎</span> 3種類×5色=15パターン</td><td><span class="s-best">◎</span> フィールド値に応じてピン色変更可</td></tr>
+        <tr><td>ピンクリックで詳細表示</td><td><span class="s-best">◎</span></td><td><span class="s-best">◎</span></td></tr>
+        <tr><td>リアルタイム反映</td><td><span class="s-best">◎</span>（画面更新が必要）</td><td><span class="s-best">◎</span>（再読み込みで反映）</td></tr>
+        <tr><td>スマートフォン対応</td><td><span class="s-best">◎</span></td><td><span class="s-best">◎</span></td></tr>
+        <tr><td>エリア指定フィルタ（円・多角形）</td><td><span class="s-bad">✕</span> 不可</td><td><span class="s-warn">△</span> オプション（月額10,000円）</td></tr>
+        <tr><td>GoogleマップリンクからピンURL</td><td><span class="s-warn">△</span> おそらく可能（@以降の緯度経度を処理）</td><td><span class="s-bad">✕</span> 住所データ→ジオコーディングが必要</td></tr>
+        <tr><td>Google Maps API</td><td><strong style="color:#15803d;">不使用（ランニングコスト0円）</strong></td><td>使用（月約7,000円程度）</td></tr>
+        <tr class="winner"><td><strong>料金</strong></td><td><strong>買い切り49,500円</strong></td><td>初期200,000円＋月額20,000円〜＋API代</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout danger">
+      <strong>MAPPLE地図プラグイン（除外）</strong> <a href="https://mapple.com/products/kintone-map/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a>
+      表示件数が最大100件/回 → 全件俯瞰が不可能。ピンの色分けも不可。<strong>候補から除外。</strong>
+    </div>
+
+    <h3>実装工数の目安</h3>
+    <table>
+      <thead><tr><th>作業</th><th>工数目安</th></tr></thead>
+      <tbody>
+        <tr><td>Ponsプラグインインストール・初期設定</td><td>2〜4時間</td></tr>
+        <tr><td>kintoneのマップリンクURL → 緯度経度変換の設定・確認</td><td>4〜8時間</td></tr>
+        <tr><td>ステータス色分け・表示条件の設定</td><td>2〜4時間</td></tr>
+        <tr><td>スマホ表示テスト・修正</td><td>2〜4時間</td></tr>
+        <tr class="winner"><td><strong>合計</strong></td><td><strong>約8〜16時間</strong>（運用内容に応じて変化）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ─── セクション 10 ─── -->
+  <div class="card" id="sec10">
+    <h2><span class="num">10</span> コスト試算（現時点・概算）</h2>
+
+    <h3>推奨構成（LOYCUS + amptalk + Yoom + Pons）</h3>
+    <table>
+      <thead><tr><th>提案</th><th>ツール</th><th>月額</th><th>初期費用</th></tr></thead>
+      <tbody>
+        <tr><td>LINE×kintone連携</td><td><span class="tool">LOYCUS</span></td><td>150,000〜200,000円</td><td>150,000〜200,000円</td></tr>
+        <tr><td>商談録音AI</td><td><span class="tool green">amptalk Basic × 15名</span></td><td>67,500円</td><td>70,000円</td></tr>
+        <tr><td>　└ kintone連携（amptalkに必須）</td><td><span class="tool green">Yoom ミニプラン</span></td><td>20,000円</td><td>なし</td></tr>
+        <tr><td>地図プラグイン</td><td><span class="tool amber">Pons</span></td><td>0円</td><td>49,500円（買い切り）</td></tr>
+        <tr class="winner">
+          <td><strong>合計</strong></td>
+          <td></td>
+          <td><span class="cost-big">237,500〜287,500円 / 月</span></td>
+          <td><strong>419,500〜519,500円</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:#64748b;">※実装工数（坂口の作業コスト）は別</p>
+
+    <h3>比較案（KUZEN置き換え）</h3>
+    <table>
+      <thead><tr><th>提案</th><th>ツール</th><th>月額</th><th>初期費用</th></tr></thead>
+      <tbody>
+        <tr><td>LINE×kintone連携</td><td>KUZEN（内製プラン）</td><td>320,000円〜（パラメーター込み）</td><td>200,000円</td></tr>
+        <tr><td>商談録音AI</td><td>amptalk Basic × 15名</td><td>67,500円</td><td>70,000円</td></tr>
+        <tr><td>　└ kintone連携（amptalkに必須）</td><td>Yoom ミニプラン</td><td>20,000円</td><td>なし</td></tr>
+        <tr><td>地図プラグイン</td><td>Pons</td><td>0円</td><td>49,500円（買い切り）</td></tr>
+        <tr>
+          <td><strong>合計</strong></td>
+          <td></td>
+          <td><span class="cost-big">407,500円〜 / 月</span></td>
+          <td><strong>319,500円〜</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>実装工数の合計</h3>
+    <table>
+      <thead><tr><th>提案</th><th>工数目安</th></tr></thead>
+      <tbody>
+        <tr><td>LINE×kintone連携（アポイント・商談管理）</td><td>36〜48時間</td></tr>
+        <tr><td>LINE×kintone連携（定期点検管理）</td><td>8〜16時間（アポイント・商談管理と重なる部分あり）</td></tr>
+        <tr><td>商談録音AI（amptalk + Yoom）</td><td>36〜48時間</td></tr>
+        <tr><td>地図プラグイン（Pons）</td><td>8〜16時間（運用内容に応じて変化）</td></tr>
+        <tr class="winner"><td><strong>合計</strong></td><td><strong>約88〜128時間（3〜5ヶ月）</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ─── セクション 11 ─── -->
+  <div class="card" id="sec11">
+    <h2><span class="num">11</span> 残課題・懸念事項</h2>
+
+    <h3><span class="pri-h">承認前に決める必要があること（3点）</span></h3>
+
+    <div class="callout danger">
+      <strong>1. 価格交渉</strong>
+      LOYCUS・amptalkを中心に、価格をどこまで下げられるか交渉する。1〜2週間以内に実施し、最終価格を確認した上で実装を開始する。
+    </div>
+
+    <div class="callout danger">
+      <strong>2. LINEでの1to1やり取りの運用方針</strong>
+      顧客との個別のやり取り（質問・クレーム・問い合わせへの返信）をどう運用するか。LINEでの1to1チャットはLINE公式アカウント or LOYCUSの管理画面上で行う必要があり、kintone内からは確認できない。現状どのように対応しているかを確認した上で、運用フローを設計する必要がある。
+    </div>
+
+    <div class="callout danger">
+      <strong>3. ハイパフォーマー比較の定義と分析の進め方</strong>
+      まずamptalkで音声（定性）から切り口を作り、何がハイパフォーマーの特徴かを仮説立て → 定量化できる指標を特定 → その上でレポート自動化（AIのAPIを活用）を検討する順番で進む。最初からレポートの自動化を目指すのではなく、<strong>定性→定量→自動化</strong>の順で進める。
+    </div>
+
+    <h3><span class="pri-m">承認後に進めること（4点）</span></h3>
+
+    <div class="callout info">
+      <strong>3. 地図表示運用</strong>
+      アポや商談の全件表示はPonsに限らずどのツールでも難しい。エリア・ステータス等のフィルタをかけた状態で表示する運用でカバーできるか検討する（課題ではなく運用設計の問題）。
+    </div>
+
+    <div class="callout info">
+      <strong>4. タイムツリー廃止・kintone統合</strong>
+      定期点検管理のツール選定と並行して、6月中に要件の整理を進める。
+    </div>
+
+    <div class="callout info">
+      <strong>5. アポアプリ vs 商談アプリの設計</strong>
+      地図に表示するデータをどちらのアプリから取るかによって連携設計が変わる。「地図で何を見たいか」を業務側と詳細に詰める必要がある（9章参照）。
+    </div>
+
+    <div class="callout info">
+      <strong>6. 住所APIを使った取得フローの整備</strong>
+      住所データが必要なので、Reverse Geocoding APIでマップリンクの緯度経度から住所を取得するフローの整備が必要になる。
+    </div>
+  </div>
+
+
+  <!-- ─── セクション 12 ─── -->
+  <div class="card" id="sec12">
+    <h2><span class="num">12</span> 今後のTODO</h2>
+
+    <p>承認後、以下の順序で進めます。価格交渉が完了し次第、実装に着手します。</p>
+
+    <h3><span class="pri-h">優先度：高</span></h3>
+    <div>
+      <div class="todo-item"><span><strong>LINEでの1to1やり取りの運用を確認・設計する</strong>（現状どう対応しているか確認→LOYCUSの管理画面での運用フローを設計）</span></div>
+      <div class="todo-item"><span><strong>amptalkで定性分析を開始し、ハイパフォーマーの切り口を定義する</strong>（Step 1から着手）</span></div>
+      <div class="todo-item"><span><strong>地図で何を見たいかを業務側と詳細に詰める</strong>（アポアプリ vs 商談アプリ・表示粒度の確定）</span></div>
+      <div class="todo-item"><span><strong>価格交渉</strong>→ Pons以外の選択肢（LOYCUS・amptalk）について、価格をどこまで下げられるか交渉</span></div>
+    </div>
+
+    <h3><span class="pri-m">優先度：中</span></h3>
+    <div>
+      <div class="todo-item"><span><strong>タイムツリー→kintone移行の要件整理を6月中に進める</strong>（坂口が主導）</span></div>
+      <div class="todo-item"><span><strong>Pons申し込み</strong>（アポアプリ vs 商談アプリの設計が固まり次第、会社ドメインで申し込む）</span></div>
+      <div class="todo-item"><span><strong>住所APIフローの整備</strong>（Reverse Geocoding APIでマップリンクの緯度経度から住所を取得するフローを整備する）</span></div>
+    </div>
+
+  </div>
+
+
+</div>
+</body>
+</html>
