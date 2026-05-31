@@ -889,14 +889,59 @@
   <div class="card" id="sec8">
     <h2><span class="num">8</span> 商談録音AI（amptalk + Yoom）</h2>
 
+    <h3>選定の前提・比較観点</h3>
+    <p>kintoneと連携できる、かつ定性評価の余地があるAI議事録・商談録音ツールを候補に入れた。</p>
+    <table>
+      <thead><tr><th>比較の観点</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td><strong>kintone連携</strong></td><td>kintoneと連携できること（iPaaS経由も可）を必要条件とした。直接連携がなくてもYoom等を経由して連携できれば対象</td></tr>
+        <tr><td><strong>定性評価の余地</strong></td><td>単なる文字起こしにとどまらず、トーク分析・ハイパフォーマー比較など評価・改善に活用できる機能があること</td></tr>
+        <tr><td><strong>スマホでの対面録音</strong></td><td>専用ボイスレコーダーなしに、スマホアプリ単体で対面録音できること</td></tr>
+        <tr><td><strong>比較したツール</strong></td><td>amptalk・Notta・Front Agent・安価なAI議事録全般</td></tr>
+      </tbody>
+    </table>
+
     <div class="callout info">
       <strong>前提：amptalk単体では導入できず、Yoom（iPaaS）とセットで導入する必要がある</strong>
       amptalkはkintoneへの直接連携を持たない。amptalkが録音・分析を担い、Yoomがamptalkのデータをkintoneに自動連携する。amptalkは渡辺さん顧問先や坂口勤務先での導入実績もあり、信頼性が高い。
     </div>
 
-    <h3>他ツールとの比較</h3>
+    <h3>要件</h3>
+    <ul>
+      <li>対面商談（テーブルを挟んだ室内）をスマホで録音</li>
+      <li><strong>初回アポ（屋外・ピンポン時）でも録音できると助かる</strong>（屋外録音の精度が重要）→ オペレーション的に実施可能か要検討</li>
+      <li>文字起こし後、AIがハイパフォーマーとローパフォーマーのトークを比較分析</li>
+      <li>特定のNGトークが出たときにアラートを出す（Slack通知）</li>
+      <li>kintoneの顧客レコードに連携</li>
+    </ul>
+
+    <h3>現状フロー vs 導入後フロー</h3>
     <table>
-      <thead><tr><th>ツール</th><th>月額</th><th>特徴</th><th>不採用の理由</th></tr></thead>
+      <thead><tr><th>ステップ</th><th>現状</th><th>導入後</th></tr></thead>
+      <tbody>
+        <tr><td>商談の記録</td><td>担当者の記憶・メモ頼り。kintone入力を忘れるメンバーが多い</td><td>スマホアプリで録音開始 → AIが自動で文字起こし・分析</td></tr>
+        <tr><td>顧客との紐づけ</td><td>なし</td><td>商談後に <strong>kintoneレコードを手動選択</strong>（完全自動化は不可）</td></tr>
+        <tr><td>分析・フィードバック</td><td>商談がブラックボックス化。ハイパフォーマーとの差が見えない</td><td>話者比率・トピック分析でハイパフォーマーの特徴を自動抽出（Step 1〜2）</td></tr>
+        <tr><td>NGトーク検知</td><td>なし</td><td>AIオートタグ + Slack通知で自動検知が可能</td></tr>
+        <tr><td>kintoneへの記録</td><td>クローザーが手入力（ヌケモレがあり得る）</td><td>amptalk要約 + Yoom経由でkintoneに議事録が自動連携</td></tr>
+        <tr><td>育成フィードバック</td><td>属人的。マネージャーの判断依存</td><td>優秀な商談をライブラリ保存 → コメント・@メンションでフィードバック</td></tr>
+      </tbody>
+    </table>
+
+    <h3>このフローのポイントになる機能</h3>
+    <table>
+      <thead><tr><th>ポイント</th><th>内容</th><th>関連するSaaS機能</th></tr></thead>
+      <tbody>
+        <tr><td><strong>話者分離精度</strong></td><td>対面商談では複数人の声を分けて認識する必要がある。屋外（風の音・雑音）での精度も重要</td><td>amptalkは自社AI内製で最大30名対応</td></tr>
+        <tr><td><strong>商談とkintoneレコードの紐づけ</strong></td><td>「誰の商談か」をどう特定するか。カレンダー連携は対面では使えないため手動になる</td><td>amptalkは停止後に手動選択。完全自動化は現時点で不可</td></tr>
+        <tr><td><strong>トーク分析・アラート</strong></td><td>ハイパフォーマーの特徴（ヒアリング率・クロージングワード等）を定量化し、NGトーク時にSlack通知</td><td>amptalkのトピック分析・AIオートタグ・NGワード登録</td></tr>
+        <tr><td><strong>kintoneへの議事録情報の連携</strong></td><td>amptalkはkintoneネイティブ連携なし → Yoom経由でAPI連携</td><td>YoomのamptalkアクションはAPIレスポンスがほぼ全取得可能</td></tr>
+      </tbody>
+    </table>
+
+    <h3>ツール比較</h3>
+    <table>
+      <thead><tr><th>ツール</th><th>月額</th><th>特徴</th><th>評価</th></tr></thead>
       <tbody>
         <tr class="winner">
           <td><strong>amptalk</strong> <a href="https://amptalk.co.jp/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></td>
@@ -922,48 +967,6 @@
           <td>文字起こし特化</td>
           <td><strong>対面録音には1人1台のボイスレコーダーが別途必要なケースが多い</strong>。スマホアプリ単体での対面録音に対応していないものが多い</td>
         </tr>
-      </tbody>
-    </table>
-
-    <div class="callout info">
-      <strong>将来的な切り替えの検討</strong>
-      まずはamptalkを使って定性（音声）から切り口を作る（Step 1〜2）。AIによる評価がうまく機能し始めたら、Step 3で分析ロジックをAI APIで自作する段階で、録音のみのツール（より安価）への切り替えも検討の余地あり。<br><br>
-      <strong>移行時の確認事項</strong>：amptalkからの移行を前提とした設計・データ移行については未確認。別ツールへの切り替えを検討する際は、amptalkに蓄積された録音・分析データのエクスポート方法を事前に確認する必要がある。
-    </div>
-
-    <h3>ハイパフォーマー比較の進め方</h3>
-    <div class="phase-block">
-<span class="st">Step 1：</span> まずは音声（定性）から切り口を作る
-         → amptalkを使い、実際の商談を録音・文字起こし。
-           話者比率・トピック分析・NGワードなどから「ハイパフォーマーの特徴」の仮説を立てる
-
-<span class="st">Step 2：</span> その切り口で定量分析ができるかを確認する
-         → amptalkの分析機能でどこまで自動計測できるか、
-           何を手動で確認する必要があるかを把握する
-
-<span class="st">Step 3：</span> レポートの自動化を検討する
-         → 定量化できた指標をYoom経由でkintoneに連携し、
-           AIのAPIを活用して週次・月次レポートの自動生成を構築する</div>
-
-    <h3>要件</h3>
-    <ul>
-      <li>対面商談（テーブルを挟んだ室内）をスマホで録音</li>
-      <li><strong>初回アポ（屋外・ピンポン時）でも録音できると助かる</strong>（屋外録音の精度が重要）→ オペレーション的に実施可能か要検討</li>
-      <li>文字起こし後、AIがハイパフォーマーとローパフォーマーのトークを比較分析</li>
-      <li>特定のNGトークが出たときにアラートを出す（Slack通知）</li>
-      <li>kintoneの顧客レコードに連携</li>
-    </ul>
-
-    <h3>現状フロー vs 導入後フロー</h3>
-    <table>
-      <thead><tr><th>ステップ</th><th>現状</th><th>導入後</th></tr></thead>
-      <tbody>
-        <tr><td>商談の記録</td><td>担当者の記憶・メモ頼り。kintone入力を忘れるメンバーが多い</td><td>スマホアプリで録音開始 → AIが自動で文字起こし・分析</td></tr>
-        <tr><td>顧客との紐づけ</td><td>なし</td><td>商談後に <strong>kintoneレコードを手動選択</strong>（完全自動化は不可）</td></tr>
-        <tr><td>分析・フィードバック</td><td>商談がブラックボックス化。ハイパフォーマーとの差が見えない</td><td>話者比率・トピック分析でハイパフォーマーの特徴を自動抽出（Step 1〜2）</td></tr>
-        <tr><td>NGトーク検知</td><td>なし</td><td>AIオートタグ + Slack通知で自動検知が可能</td></tr>
-        <tr><td>kintoneへの記録</td><td>クローザーが手入力（ヌケモレがあり得る）</td><td>amptalk要約 + Yoom経由でkintoneに議事録が自動連携</td></tr>
-        <tr><td>育成フィードバック</td><td>属人的。マネージャーの判断依存</td><td>優秀な商談をライブラリ保存 → コメント・@メンションでフィードバック</td></tr>
       </tbody>
     </table>
 
@@ -1016,6 +1019,26 @@
     <div class="callout info">
       料金：ミニプラン（kintone連携を含む場合に必要）<strong>20,000円 / 環境 / 月</strong>（20名まで利用可能）<br>
       <strong>注意：</strong>Yoomのフローボットを自分で構築する必要がある。kintoneのどのフィールドに何を書き込むかを事前に設計しておく必要がある。
+    </div>
+
+    <h3>ハイパフォーマー比較の進め方</h3>
+    <div class="phase-block">
+<span class="st">Step 1：</span> まずは音声（定性）から切り口を作る
+         → amptalkを使い、実際の商談を録音・文字起こし。
+           話者比率・トピック分析・NGワードなどから「ハイパフォーマーの特徴」の仮説を立てる
+
+<span class="st">Step 2：</span> その切り口で定量分析ができるかを確認する
+         → amptalkの分析機能でどこまで自動計測できるか、
+           何を手動で確認する必要があるかを把握する
+
+<span class="st">Step 3：</span> レポートの自動化を検討する
+         → 定量化できた指標をYoom経由でkintoneに連携し、
+           AIのAPIを活用して週次・月次レポートの自動生成を構築する</div>
+
+    <div class="callout info">
+      <strong>将来的な切り替えの検討</strong>
+      まずはamptalkを使って定性（音声）から切り口を作る（Step 1〜2）。AIによる評価がうまく機能し始めたら、Step 3で分析ロジックをAI APIで自作する段階で、録音のみのツール（より安価）への切り替えも検討の余地あり。<br><br>
+      <strong>移行時の確認事項</strong>：amptalkからの移行を前提とした設計・データ移行については未確認。別ツールへの切り替えを検討する際は、amptalkに蓄積された録音・分析データのエクスポート方法を事前に確認する必要がある。
     </div>
 
     <h3>実装工数の目安（初期実装）</h3>
