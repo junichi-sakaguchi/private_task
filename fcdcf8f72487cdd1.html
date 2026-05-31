@@ -890,7 +890,7 @@
     <h2><span class="num">8</span> 商談録音AI（amptalk + Yoom）</h2>
 
     <h3>選定の前提・比較観点</h3>
-    <p>kintoneと連携できる、かつ定性評価の余地があるAI議事録・商談録音ツールを候補に入れた。</p>
+    <p>kintoneと連携できる（iPaaS経由も可）、かつ定性評価の余地があるAI議事録・商談録音ツールを候補に入れた。また、対面商談を前提とするため、専用ボイスレコーダーが不要でスマホ単体で対面録音できるものに絞った（汎用AI議事録の多くは専用機器が必要、またはスマホ単体での対面録音に対応していないケースが多い）。</p>
     <table>
       <thead><tr><th>比較の観点</th><th>内容</th></tr></thead>
       <tbody>
@@ -969,6 +969,35 @@
         </tr>
       </tbody>
     </table>
+
+    <h3>Notta（評価完了 ○ — 不採用） <a href="https://www.notta.ai/ja" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></h3>
+    <table>
+      <thead><tr><th>要件</th><th>対応</th><th>メモ</th></tr></thead>
+      <tbody>
+        <tr><td>対面商談録音（スマホ単体）</td><td><span class="s-warn">△</span></td><td>基本はオンライン会議向け。対面録音は動作するが精度・話者分離は未確認</td></tr>
+        <tr><td>話者分離</td><td><span class="s-warn">△</span></td><td>対応はあるが対面環境での精度は確認が必要</td></tr>
+        <tr><td>トーク分析・ハイパフォーマー比較</td><td><span class="s-bad">✕</span></td><td>汎用AI議事録のため営業特化の分析機能がない</td></tr>
+        <tr><td>NGワードアラート</td><td><span class="s-bad">✕</span></td><td>対応なし</td></tr>
+        <tr><td>kintone連携</td><td><span class="s-warn">△</span></td><td>iPaaS経由での連携は可能だが、取得できる分析データが限定的</td></tr>
+      </tbody>
+    </table>
+    <div class="callout info">
+      料金：月額2,000円前後（個人プランあり）<br>
+      不採用理由：選定基準の「定性評価の余地」を満たさない。トーク分析・ハイパフォーマー比較など営業特化の分析機能がなく、文字起こしツールとしての用途に限定される。
+    </div>
+
+    <h3>Front Agent（候補から除外） <a href="https://umeecorp.com/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></h3>
+    <table>
+      <thead><tr><th>要件</th><th>対応</th><th>メモ</th></tr></thead>
+      <tbody>
+        <tr class="winner"><td>kintone連携</td><td><span class="s-best">◎</span></td><td>kintone連携に強い。専用コンサルパッケージで丸ごと対応可能</td></tr>
+        <tr class="winner"><td>商談分析・PDCA支援</td><td><span class="s-best">◎</span></td><td>営業PDCAの設計・実行まで含む支援</td></tr>
+        <tr class="excluded"><td>コスト</td><td><span class="s-bad">✕</span></td><td>初期150万円＋月額30万円。現フェーズには過大投資</td></tr>
+      </tbody>
+    </table>
+    <div class="callout danger">
+      不採用理由：コンサルパッケージ（初期150万円＋月額30万円）で高額すぎる。現段階でPDCAの難易度や必要スコープが読めない状況での採用は時期尚早。
+    </div>
 
     <h3>amptalk（確定候補 ◎） <a href="https://amptalk.co.jp/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></h3>
     <table>
@@ -1062,11 +1091,21 @@
     <table>
       <thead><tr><th>比較の観点</th><th>内容</th></tr></thead>
       <tbody>
-        <tr><td><strong>kintoneとの即時連携</strong></td><td>kintoneのデータが更新されたら地図にも反映されること。手動インポート不要</td></tr>
-        <tr><td><strong>Google マイマップとの比較</strong></td><td>Google マイマップは手動でピンを立てることができるが、kintoneとのリアルタイム連携ができない。更新のたびに手動作業が発生し、kintoneとの乖離が生まれるため候補外</td></tr>
+        <tr><td><strong>kintoneとのリアルタイム連携</strong></td><td>kintoneのデータが更新されたら地図にも即時反映されること。手動インポート不要</td></tr>
+        <tr><td><strong>Google マイマップとの比較</strong></td><td>手動でピンを立てることはできるが、kintoneとのリアルタイム連携ができない。更新のたびに手動作業が発生し、kintoneとの乖離が生まれるため候補外</td></tr>
         <tr><td><strong>比較したツール</strong></td><td>Pons（買い切り）・カンタンマップ（月額）・MAPPLEプラグイン（件数制限で要件を満たさないため除外）</td></tr>
       </tbody>
     </table>
+
+    <h3>要件</h3>
+    <ul>
+      <li>アポイント顧客ベースでのピン表示</li>
+      <li>ステータス別色分け（アポ未取得・取得済み・商談済み・受注・失注など）</li>
+      <li>ピンクリックで前回商談の詳細・失注理由を表示</li>
+      <li>スマートフォン対応</li>
+      <li>エリア（円・多角形）指定でのフィルタ（再訪問先の絞り込みに活用したい）</li>
+      <li><strong>住所データは現状なし</strong>。kintoneにはGoogleマップリンクURL（@以降に緯度経度を含む）を登録</li>
+    </ul>
 
     <h3>重要な前提と検討事項</h3>
 
@@ -1097,6 +1136,28 @@
       地図に表示するデータをアポアプリから取るか、商談アプリから取るかで連携の設計が変わる。どのデータを地図で見たいかによって最適解が変わるため、「地図で何を確認したいか」を業務側と詳細に詰める必要がある。
     </div>
 
+    <h3>現状フロー vs 導入後フロー</h3>
+    <table>
+      <thead><tr><th>ステップ</th><th>現状</th><th>導入後</th></tr></thead>
+      <tbody>
+        <tr><td>エリア確認</td><td>エリアだけを決めて言質を回っていく</td><td><strong>kintone地図プラグインで一覧表示。ステータス別に色分け</strong></td></tr>
+        <tr><td>再訪問先の特定</td><td>「昔訪れたことがある場所」「再訪でアポが取れそうな場所」を記憶・手動リストアップ</td><td><strong>フィルタで「失注から半年以上経過」等の条件で絞り込み → ピンをタップして詳細確認</strong></td></tr>
+        <tr><td>商談前の確認</td><td>クローザーが近くの成約顧客を手動で確認</td><td>ピンをクリックして最寄りの成約顧客を瞬時に確認</td></tr>
+        <tr><td>訪問計画</td><td>感覚ベースでエリアを決める</td><td>エリアフィルタで対象ピンを絞り込んで効率的に訪問計画</td></tr>
+      </tbody>
+    </table>
+
+    <h3>このフローのポイントになる機能</h3>
+    <table>
+      <thead><tr><th>ポイント</th><th>内容</th><th>関連するSaaS機能</th></tr></thead>
+      <tbody>
+        <tr><td><strong>多件数表示</strong></td><td>全件表示はどのツールでも難しい。フィルタをかけた状態での表示運用を検討</td><td>数千〜15,000件前後の表示はどのツールでも確認済み。それ以上は難しい</td></tr>
+        <tr><td><strong>GoogleマップリンクURL → ピン変換</strong></td><td>住所データがないため、マップリンクURLから緯度経度を取得しピンを生成する必要がある</td><td>Ponsはリンクからの処理で対応可能。カンタンマップは住所データが必要</td></tr>
+        <tr><td><strong>ステータス別色分け</strong></td><td>15パターン以上あれば各ステータスを色で区別できる</td><td>Ponsは3種類×5色=15パターン対応</td></tr>
+        <tr><td><strong>エリア指定フィルタ</strong></td><td>円・多角形でエリアを囲んでその中のピンを絞り込む機能</td><td>Ponsは不可。カンタンマップはオプションで月額10,000円</td></tr>
+      </tbody>
+    </table>
+
     <h3>Pons（第一候補 △〜◎） <a href="https://kintone-sol.cybozu.co.jp/integrate/pons001.html" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></h3>
     <table>
       <thead><tr><th>要件</th><th>対応</th><th>メモ</th></tr></thead>
@@ -1109,15 +1170,39 @@
         <tr><td>GoogleマップリンクからピンURL</td><td><span class="s-warn">△</span></td><td>マップリンクからデータ取得する機能を作ることで可能</td></tr>
         <tr class="winner"><td>現在地表示</td><td><span class="s-best">◎</span></td><td>対応あり</td></tr>
         <tr class="winner"><td>ルート検索</td><td><span class="s-best">◎</span></td><td>対応あり</td></tr>
+        <tr class="winner"><td>Google Maps API</td><td>不使用</td><td>ランニングコスト0円</td></tr>
       </tbody>
     </table>
     <div class="callout success">
-      料金：<strong>買い切り49,500円</strong>（Google Maps API不使用 → ランニングコスト0円）
+      料金：<strong>買い切り49,500円・月額0円</strong>。地図ツール候補の中で<strong>最安値</strong>（表示運用は要検討）
     </div>
 
-    <h3>カンタンマップ <a href="https://kantanmap.jp/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a> vs Pons 全項目比較</h3>
+    <h3>カンタンマップ（バックアップ候補 △） <a href="https://kantanmap.jp/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></h3>
+    <table>
+      <thead><tr><th>要件</th><th>対応</th><th>メモ</th></tr></thead>
+      <tbody>
+        <tr><td>ピン表示（多件数）</td><td><span class="s-warn">△</span></td><td>最大5,000件/回（絞り込み利用推奨）</td></tr>
+        <tr class="winner"><td>ステータス別色分け</td><td><span class="s-best">◎</span></td><td>フィールド値に応じてピン色変更可</td></tr>
+        <tr class="winner"><td>ピンクリックで詳細表示</td><td><span class="s-best">◎</span></td><td>ポップアップでkintoneレコード情報を表示</td></tr>
+        <tr class="winner"><td>スマートフォン対応</td><td><span class="s-best">◎</span></td><td>カンタンマップモバイルあり</td></tr>
+        <tr><td>エリア指定フィルタ（円・多角形）</td><td><span class="s-warn">△</span></td><td>オプション（月額10,000円）で対応可能</td></tr>
+        <tr><td>GoogleマップリンクからピンURL</td><td><span class="s-bad">✕</span></td><td>住所データ→ジオコーディングが必要。現状データ構造では対応困難</td></tr>
+        <tr><td>Google Maps API</td><td>使用</td><td>月約7,000円のランニングコスト発生</td></tr>
+      </tbody>
+    </table>
     <div class="callout info">
-      <strong>方針</strong>：まずPonsで運用を確認し、エリア指定フィルタ等でPonsでは致命的に機能が不足する場合にカンタンマップへの切り替えを検討する。
+      料金：初期200,000円 ＋ 月額20,000円〜 ＋ Google Maps API代（月約7,000円）<br>
+      方針：まずPonsで運用を確認し、エリア指定フィルタ等でPonsでは致命的に機能が不足する場合にカンタンマップへの切り替えを検討する。
+    </div>
+
+    <h3>MAPPLE地図プラグイン（除外） <a href="https://mapple.com/products/kintone-map/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></h3>
+    <div class="callout danger">
+      表示件数が最大100件/回 → 全件俯瞰が不可能。ピンの色分けも不可。現場での実用性を満たさないため候補から除外。
+    </div>
+
+    <h3>Pons vs カンタンマップ 全項目比較</h3>
+    <div class="callout info">
+      コストに大幅な差があるため、まずPonsを検証導入する。Ponsで致命的な機能不足が出た場合にカンタンマップを検討。
     </div>
     <table>
       <thead><tr><th>要件</th><th>Pons</th><th>カンタンマップ</th></tr></thead>
@@ -1133,11 +1218,6 @@
         <tr class="winner"><td><strong>料金</strong></td><td><strong>買い切り49,500円</strong></td><td>初期200,000円＋月額20,000円〜＋API代</td></tr>
       </tbody>
     </table>
-
-    <div class="callout danger">
-      <strong>MAPPLE地図プラグイン（除外）</strong> <a href="https://mapple.com/products/kintone-map/" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a>
-      表示件数が最大100件/回 → 全件俯瞰が不可能。ピンの色分けも不可。<strong>候補から除外。</strong>
-    </div>
 
     <h3>実装工数の目安</h3>
     <table>
