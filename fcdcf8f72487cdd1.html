@@ -95,6 +95,17 @@
       text-decoration: none;
     }
     .toc-grid a:hover { text-decoration: underline; }
+    .toc-section-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: #475569;
+      background: #f1f5f9;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin: 14px 0 6px;
+      display: inline-block;
+    }
+    .toc-section-label:first-of-type { margin-top: 4px; }
 
     /* ── セクションマーカー ── */
     .part-marker {
@@ -382,18 +393,28 @@
   <!-- ══════════════ 目次 ══════════════ -->
   <div class="toc">
     <div class="toc-title">目次</div>
+
+    <div class="toc-section-label">前提の整理</div>
     <div class="toc-grid">
       <a href="#sec1">1. SaaSを活用する理由と今後の方向性</a>
-      <a href="#sec7">7. LINE×kintone連携（定期点検管理）</a>
       <a href="#sec2">2. 今回解決したい課題と実現手段</a>
-      <a href="#sec8">8. 商談録音AI（amptalk + Yoom）</a>
       <a href="#sec3">3. 前提：社内の業務実態</a>
-      <a href="#sec9">9. 地図プラグイン（営業エリア可視化）</a>
       <a href="#sec4">4. フロー全体像（現状 vs 導入後）</a>
-      <a href="#sec10">10. コスト試算</a>
+    </div>
+
+    <div class="toc-section-label">提案の概要</div>
+    <div class="toc-grid">
       <a href="#sec5">5. 提案内容のサマリー</a>
-      <a href="#sec11">11. 残課題・懸念事項</a>
+    </div>
+
+    <div class="toc-section-label">提案の詳細</div>
+    <div class="toc-grid">
       <a href="#sec6">6. LINE×kintone連携（アポイント・商談管理）</a>
+      <a href="#sec7">7. LINE×kintone連携（定期点検管理）</a>
+      <a href="#sec8">8. 商談録音AI（amptalk + Yoom）</a>
+      <a href="#sec9">9. 地図プラグイン（営業エリア可視化）</a>
+      <a href="#sec10">10. コスト試算</a>
+      <a href="#sec11">11. 残課題・懸念事項</a>
       <a href="#sec12">12. 今後のTODO</a>
     </div>
   </div>
@@ -637,7 +658,7 @@
           <td><strong>Pons</strong>（条件付き） <a href="https://kintone-sol.cybozu.co.jp/integrate/pons001.html" target="_blank" rel="noopener noreferrer" class="service-link">公式サイト ↗</a></td>
           <td><span class="s-warn">△〜◎</span></td>
           <td>49,500円（買い切り）</td>
-          <td>Ponsは買い切り。表示の方法は運用を要検討</td>
+          <td>買い切り49,500円・月額0円。地図ツール候補の中で<strong>最安値</strong>（表示運用は要検討）</td>
         </tr>
       </tbody>
     </table>
